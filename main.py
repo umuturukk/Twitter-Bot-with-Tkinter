@@ -1,3 +1,4 @@
+# Gerekli Modüllerin Import Edilmesi
 import tkinter as tk
 from tkinter import *
 from time import sleep
@@ -5,12 +6,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from tkinter import messagebox
 
-root = Tk()
-root.title("Twitter Bot")
-root.resizable(False, False)
+root = Tk() # Tk sınıfından root nesnesi ürettik. Bu bizim penceremiz olacak.
+root.title("Twitter Bot") # Pencerenin başlığı.
+root.resizable(False, False) # Pencerenin boyutunun büyütülüp, küçültülmesinin önüne geçtik.
 
+# Giriş yap fonksiyonu. Twitter'a giriş yapma sürecini yerine getiren metot.
 def girisYap():
-    global driver
+    global driver 
     driver = webdriver.Chrome()
     driver.get("https://twitter.com/i/flow/login")
     driver.maximize_window()
@@ -26,6 +28,7 @@ def girisYap():
     driver.find_element(By.XPATH, "/html/body/div/div/div/div[1]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div/div/div").click()
     sleep(2)
     
+# Bulunduğumuz web sayfasının en aşağısına kadar inip daha sonra en yukarısına çıkmamızı sağlayan metot.
 def scrollDown():
     global tur
     last_height = driver.execute_script("return document.documentElement.scrollHeight")
@@ -108,7 +111,6 @@ kaydetButonu.pack(anchor = N, padx = 5, pady = 10)
 text_area = Text(text_frame, height = 24, width = 60)
 text_area.configure(bg = "#ecf0f1", fg = "black", font = ("Courier", 12))
 text_area.pack(anchor = N, padx = 15, pady = 10)
-
 
 def uygula():
     girisYap()
